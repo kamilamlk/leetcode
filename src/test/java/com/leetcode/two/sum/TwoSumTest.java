@@ -16,6 +16,7 @@ public class TwoSumTest {
         Assertions.assertTrue(Arrays.equals(expected, twoSum.twoSum(array, target)));
     }
 
+
     private static Stream<Arguments> provider() {
         return Stream.of(
                 Arguments.of(new int[] {2,7,11,15}, 9, new int[]{0, 1}),
