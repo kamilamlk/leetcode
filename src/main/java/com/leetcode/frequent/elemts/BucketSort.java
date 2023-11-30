@@ -1,5 +1,9 @@
 package com.leetcode.frequent.elemts;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class BucketSort {
     /**
      * bucketSort(a[], n)
@@ -39,7 +43,31 @@ public class BucketSort {
                 buckets[i]--;
             }
         }
+    }
 
+    // n = 10, 700
+    public void sort(int[] array, int n) {
+        int max = getMax(array);
+
+        List<Integer>[] buckets = new ArrayList[n];
+        for (int i = 0; i < n; i++) {
+            buckets[i] = new ArrayList<>();
+        }
+
+        for (int i = 0; i < array.length; i++) {
+            int bucketIndex = ((n -1) * array[i] / max) * (array[i] > 0 ? 1 : -1);
+            buckets[bucketIndex].add(array[i]);
+        }
+        for (int i = 0; i < n; i++) {
+            Collections.sort(buckets[i]);
+        }
+        int index = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < buckets[i].size(); j++) {
+                array[index] = buckets[i].get(j);
+                index++;
+            }
+        }
     }
 
     int getMax(int[] a) {

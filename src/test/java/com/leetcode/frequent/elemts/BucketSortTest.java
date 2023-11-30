@@ -13,13 +13,13 @@ public class BucketSortTest {
     @ParameterizedTest
     @MethodSource("provider")
     void test(int[] array, int[] expected) {
-        bucketSort.sort(array);
+        bucketSort.sort(array, 5);
         Assertions.assertTrue(Arrays.equals(expected, array));
     }
 
     private static Stream<Arguments> provider() {
         return Stream.of(
-                Arguments.of(new int[]{5, 9, -6, 4, 6}, new int[]{-6, 4, 5, 6, 9})
+                Arguments.of(new int[]{5, 9, 6, 4, 6}, new int[]{4, 5, 6, 6, 9})
         );
     }
 }
