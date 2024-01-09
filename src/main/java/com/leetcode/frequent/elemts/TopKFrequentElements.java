@@ -1,10 +1,9 @@
 package com.leetcode.frequent.elemts;
 
-import java.util.Arrays;
-import java.util.Comparator;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.PriorityQueue;
 
 public class TopKFrequentElements {
     /**
@@ -30,26 +29,26 @@ public class TopKFrequentElements {
      * Follow up: Your algorithm's time complexity must be better than O(n log n), where n is the array's size.
      */
     public int[] topKFrequent(int[] nums, int k) {
-        PriorityQueue<Integer> queue;
-        Integer[] array;
-        Map<Integer, Integer> map = new HashMap<>();
+        Map<Integer, Integer> count = new HashMap<>();
         for (int num : nums) {
-            if (!map.containsKey(num)) {
-                map.put(num, 1);
-            } else {
-                map.put(num, (map.get(num) + 1));
+            count.put(num, count.getOrDefault(num, 0) + 1);
+        }
+        List<Integer>[] bucket = new List[nums.length + 1];
+        for (int n : count.keySet()) {
+            int c = count.get(n);
+            if (bucket[c] == null) bucket[c] = new ArrayList<>();
+            bucket[c].add(n);
+        }
+
+        int[] res = new int[k];
+        int j = 0;
+        for (int i = nums.length; i >= 0; i--) {
+            if (bucket[i] == null) continue;
+            for (int n : bucket[i]) {
+                res[j++] = n;
+                if (j == k) return res;
             }
         }
-
-        for (Integer integer : map.keySet()) {
-
-        }
-        array = map.values().toArray(new Integer[0]);
-        Arrays.sort(array, Comparator.reverseOrder());
-        int[] result = new int[k];
-        for (int i = 0; i < k; i++) {
-            result[i] = array[i];
-        }
-        return result;
+        return res;
     }
 }

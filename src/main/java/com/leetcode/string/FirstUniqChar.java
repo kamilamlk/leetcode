@@ -2,7 +2,6 @@ package com.leetcode.string;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 public class FirstUniqChar {
 	private static class Pair<T> {
