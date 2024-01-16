@@ -20,14 +20,14 @@ public class Sudoku {
             int[] verticalLines = new int[board.length];
 
             for (int j = 0; j < board[i].length; j++) {
-                if (!isValid(toDigit(board[i][j]) - 1, horizontalLines)) {
+                if (isNotValid(toDigit(board[i][j]) - 1, horizontalLines)) {
                     return false;
                 }
-                if (!isValid(toDigit(board[j][i]) - 1, verticalLines)) {
+                if (isNotValid(toDigit(board[j][i]) - 1, verticalLines)) {
                     return false;
                 }
                 int squad = getSquad(i, j);
-                if (!isValid(toDigit(board[i][j]) - 1, squads[squad])) {
+                if (isNotValid(toDigit(board[i][j]) - 1, squads[squad])) {
                     return false;
                 }
             }
@@ -64,16 +64,16 @@ public class Sudoku {
         }
     }
 
-    private boolean isValid(int value, int[] lines) {
+    private boolean isNotValid(int value, int[] lines) {
         if (value >= 0) {
             if (lines[value] > 0) {
-                return false;
+                return true;
             } else {
                 lines[value] = lines[value] + 1;
-                return true;
+                return false;
             }
         } else {
-            return true;
+            return false;
         }
     }
 
