@@ -1,8 +1,5 @@
 package com.leetcode.two.sum;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class TwoSum {
     /**
      * Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
@@ -25,25 +22,19 @@ public class TwoSum {
      * Input: nums = [3,3], target = 6
      * Output: [0,1]
      */
-    public int[] twoSum(int[] nums, int target) {
-        Map<Integer,Integer> complements = new HashMap<>();
-
-        for (int i = 0; i < nums.length; i++) {
-            if (complements.containsKey(nums[i])) {
-                return new int[] {complements.get(nums[i]), i};
+    public int[] twoSum(int[] numbers, int target) {
+        int i = 0;
+        int j = numbers.length - 1;
+        while (i < j) {
+            int sum = numbers[i] + numbers[j];
+            if (sum == target) {
+                return new int[]{i + 1, j + 1};
+            } else if (sum < target) {
+                i++;
+            } else {
+                j--;
             }
-            complements.put(target - nums[i], i);
         }
         return new int[0];
     }
-
-    /**
-     * {5, 2, 4}
-     * 6
-     * 5 + 1 = 6
-     * 1 is a complement value
-     * HashMap
-     * K                  -> V
-     * 1 (complement value) -> 0 (index)
-     */
 }
