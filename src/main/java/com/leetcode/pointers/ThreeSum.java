@@ -6,29 +6,37 @@ import java.util.List;
 
 public class ThreeSum {
     public List<List<Integer>> threeSum(int[] nums) {
-        // [-1,0,1,2,-1,-4]
+        // O(n log(n)) + O(n^2)
+
         Arrays.sort(nums);
-        // [-4,-1,-1,0,1,2]
+        System.out.println(Arrays.toString(nums));
         List<List<Integer>> triplets = new ArrayList<>();
+
         for (int i = 0; i < nums.length; i++) {
-            // i = 0; k = 1; j = 5
-            int k = i + 1;
-            int j =  nums.length - 1;
-            while (k < j) {
+            if (i > 0 && nums[i] == nums[i -1]) {
+                continue;
+            }
+            int j = i+1;
+            int k = nums.length - 1;
+            while (j < k) {
                 int sum = nums[i] + nums[j] + nums[k];
-                if (sum < 0) {
-                    k++;
-                } else if (sum > 0) {
-                    j--;
+                if (sum > 0) {
+                    k--;
+                } else if (sum < 0) {
+                    j++;
                 } else {
-                    triplets.add(List.of(nums[i], nums[k], nums[j]));
-                    while (nums[i] == nums[i+1] && i < k) {
-                        i++;
+                    triplets.add(List.of(nums[i], nums[j], nums[k]));
+                    k--;
+                    j++;
+                    while (nums[k] == nums[k+1] && k > j) {
+                        k--;
+                    }
+                    while (j < k && nums[j] == nums[j-1]) {
+                        j++;
                     }
                 }
             }
         }
         return triplets;
     }
-
 }
