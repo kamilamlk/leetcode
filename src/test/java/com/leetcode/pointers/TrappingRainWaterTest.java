@@ -7,21 +7,19 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-public class ValidPalindromeTest {
-    ValidPalindrome validPalindrome = new ValidPalindrome();
+public class TrappingRainWaterTest {
+    TrappingRainWater water = new TrappingRainWater();
 
     @ParameterizedTest
     @MethodSource("provider")
-    void test(String s, boolean expected) {
-        Assertions.assertEquals(expected, validPalindrome.isPalindrome(s));
+    void test(int[] height, int expected) {
+        Assertions.assertEquals(expected, water.trap(height));
     }
 
     private static Stream<Arguments> provider() {
         return Stream.of(
-            Arguments.of("A man, a plan, a canal: Panama", true),
-            Arguments.of("race a car", false),
-            Arguments.of(" ", true),
-            Arguments.of("0P", false)
+                Arguments.of(new int[] {0,1,0,2,1,0,1,3,2,1,2,1}, 6),
+                Arguments.of(new int[] {4,2,0,3,2,5}, 9)
         );
     }
 }
