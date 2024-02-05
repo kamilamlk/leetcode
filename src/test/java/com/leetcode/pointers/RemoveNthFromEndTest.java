@@ -8,9 +8,10 @@ public class RemoveNthFromEndTest {
     @Test
     void test() {
         ListNode head = toListNode(new int[] {1,2,3,4,5});
-
         System.out.println(removeNthFromEnd.removeNthFromEnd(head, 2));
 
+        head = toListNode(new int[] {1,2});
+        System.out.println(removeNthFromEnd.removeNthFromEnd(head, 2));
     }
 
     private ListNode toListNode(int[] array) {
