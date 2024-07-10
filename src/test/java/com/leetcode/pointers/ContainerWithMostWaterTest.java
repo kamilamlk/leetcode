@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-public class ContainerWithMostWaterTest {
+class ContainerWithMostWaterTest {
     ContainerWithMostWater container = new ContainerWithMostWater();
 
     @ParameterizedTest
@@ -19,7 +19,8 @@ public class ContainerWithMostWaterTest {
     private static Stream<Arguments> provider() {
         return Stream.of(
             Arguments.of(new int[] {1,8,6,2,5,4,8,3,7}, 49),
-            Arguments.of(new int[] {0,2}, 0)
+            Arguments.of(new int[] {0,2}, 0),
+            Arguments.of(new int[] {1,2,4,3}, 4)
         );
     }
 }
