@@ -1,4 +1,4 @@
-package com.leetcode.arrays.and.hashing.duplicate_217;
+package com.leetcode.arrays;
 
 import org.junit.gen5.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;

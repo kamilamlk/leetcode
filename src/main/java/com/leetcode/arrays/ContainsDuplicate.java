@@ -1,4 +1,4 @@
-package com.leetcode.arrays.and.hashing.duplicate_217;
+package com.leetcode.arrays;
 
 import java.util.Arrays;
 
