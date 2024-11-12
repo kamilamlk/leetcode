@@ -1,6 +1,6 @@
 package com.leetcode.arrays;
 
-public class RotateArray1 {
+public class RotateArrayJuggling {
     // Time complexity O(n)
     // Space complexity O(1)
     public void rotate(int[] nums, int k) {
@@ -29,7 +29,7 @@ public class RotateArray1 {
     }
 
     public static void main(String[] args) {
-        RotateArray1 rotateArray = new RotateArray1();
+        RotateArrayJuggling rotateArray = new RotateArrayJuggling();
         int[] nums = {1, 2, 3, 4, 5, 6, 7};
         rotateArray.rotate(nums, 3);
         for (int num : nums) {
