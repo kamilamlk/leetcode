@@ -1,32 +1,36 @@
 package com.leetcode.queue.tree;
 
+/**
+ * https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/
+ * Time: O(n)
+ * Space: O(h) for recursion
+ */
 public class LowestCommonAncestor {
+    private TreeNode lca = null;
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        if (root == null) {
-            return null;
-        }
-        if (isDescendant(root, p) && isDescendant(root, q)) {
-            TreeNode left = lowestCommonAncestor(root.left, p, q);
-            TreeNode right = lowestCommonAncestor(root.right, p, q);
-            if (left != null && right != null) {
-                return root;
-            } else if (left != null) {
-                return left;
-            } else {
-                return right;
-            }
-        }
-        return null;
+        isDescendant(root, p, q);
+        return lca;
     }
 
-    private boolean isDescendant(TreeNode node, TreeNode p) {
+    private boolean isDescendant(TreeNode node, TreeNode p, TreeNode q) {
         if (node == null) {
             return false;
         }
-        if (node == p) {
+
+        var left = isDescendant(node.left, p, q);
+        var right = isDescendant(node.right, p, q);
+
+        System.out.println("node: " + node.val + ", left: " + left + " right: " + right);
+        if (node.val == p.val || node.val == q.val) {
+            if (left || right) {
+                lca = node;
+            }
             return true;
         }
-        return isDescendant(node.left, p) || isDescendant(node.right, p);
+        if (left && right) {
+            lca = node;
+        }
+        return left || right;
     }
 
     public static void main(String[] args) {
