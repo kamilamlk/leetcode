@@ -1,5 +1,6 @@
 package com.leetcode.queue.stack;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class Node {
@@ -19,5 +20,10 @@ public class Node {
     public Node(int val, List<Node> neighbors) {
         this.val = val;
         this.neighbors = neighbors;
+    }
+
+    @Override
+    public String toString() {
+        return val + " ";
     }
 }
