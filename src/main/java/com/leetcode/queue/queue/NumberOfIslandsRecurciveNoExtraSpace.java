@@ -1,4 +1,4 @@
-package com.leetcode.queue;
+package com.leetcode.queue.queue;
 
 public class NumberOfIslandsRecurciveNoExtraSpace {
     public int numIslands(char[][] grid) {

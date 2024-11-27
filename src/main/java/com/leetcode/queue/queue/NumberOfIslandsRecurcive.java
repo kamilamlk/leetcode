@@ -1,4 +1,4 @@
-package com.leetcode.queue;
+package com.leetcode.queue.queue;
 
 public class NumberOfIslandsRecurcive {
     boolean[][] visited;
