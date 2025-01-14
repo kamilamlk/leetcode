@@ -4,17 +4,17 @@ public class ClimbingStairs {
 
     public int climbStairs(int n) {
         if (n < 3) {
-            return n;
+            return 1;
         }
-        int b2 = 1;
-        int b1 = 2;
-        int b = 0;
-        for (int i = 3; i <= n; i++) {
-            b = b1 + b2;
-            b2 = b1;
-            b1 = b;
+        int s1 = 1;
+        int s2 = 2;
+        int s = 0;
+        for (int i = 2; i < n; i++) {
+            s = s1 + s2;
+            s1 = s2;
+            s2 = s;
         }
-        return b;
+        return s;
     }
 
 
