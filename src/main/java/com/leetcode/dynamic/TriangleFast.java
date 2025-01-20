@@ -5,15 +5,27 @@ import java.util.List;
 
 public class TriangleFast {
     public int minimumTotal(List<List<Integer>> triangle) {
-        return getMin(triangle, 0, 0);
+        if (triangle.size() == 1) {
+            return triangle.get(0).get(0);
+        }
+        int min = Integer.MAX_VALUE;
+        int[] dp = new int[triangle.size()];
+        dp[0] = triangle.get(0).get(0);
+        for (int i = 1; i < triangle.size()-1; i++) {
+            int[] dpPrev = dp.clone();
+            for (int j = 0; j < triangle.get(i).size(); j++) {
+                if (j == 0) {
+                    dp[j] = triangle.get(i).get(j) + dpPrev[j];
+                } else if (j == triangle.get(i).size() - 1) {
+                    dp[j] = triangle.get(i).get(j) + dpPrev[j-1];
+                } else {
+                    dp[j] = triangle.get(i).get(j) + Math.min(dpPrev[j -1], dpPrev[j]);
+                }
+            }
+        }
+        return min;
     }
 
-    private int getMin(List<List<Integer>> triangle, int i, int j) {
-        if (i == triangle.size() - 1) {
-            return triangle.get(i).get(j);
-        }
-        return Math.min(getMin(triangle, i + 1, j), getMin(triangle, i + 1, j + 1)) + triangle.get(i).get(j);
-    }
 
     public static void main(String[] args) {
         TriangleFast triangle = new TriangleFast();
