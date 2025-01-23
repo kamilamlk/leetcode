@@ -2,7 +2,7 @@ package com.leetcode.pointers;
 
 public class RemoveDuplicatesSortedListII {
     public ListNode deleteDuplicates(ListNode head) {
-       
+        return null;
     }
 
     public static void main(String[] args) {
