@@ -2,21 +2,37 @@ package com.leetcode.linked.list;
 
 import com.leetcode.pointers.ListNode;
 
-public class Palindrome {
+public class PalindromeFast {
     boolean isPalindrome = true;
     public boolean isPalindrome(ListNode head) {
-        if(head == null || head.next == null) {
-            return true;
-        }
-        int size = 0;
-        ListNode current = head;
-        while (current != null) {
-            size++;
-            current = current.next;
+        // 1 2 2 1
+        // get the middle
+        ListNode slow = head;
+        ListNode fast = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
         }
 
-        isPalindrome(head, size, 0);
-        return isPalindrome;
+        // swap the second half
+        ListNode prev = null;
+        ListNode current = slow;
+        while (current != null) {
+            ListNode next = current.next; // 1
+            current.next = prev; // null
+            prev = current; // 2
+            current = next; // 1
+        }
+
+        while (prev != null) {
+            if (head.val != prev.val) {
+                return false;
+            } else {
+                prev = prev.next;
+                head = head.next;
+            }
+        }
+        return true;
     }
     // 0 1 2 3
     // 1 2 2 1
@@ -38,7 +54,7 @@ public class Palindrome {
 
 
     public static void main(String[] args) {
-        Palindrome p = new Palindrome();
+        PalindromeFast p = new PalindromeFast();
         System.out.println(p.isPalindrome(create(1,2,2,2,1)));
         System.out.println(p.isPalindrome(create(1,2,2,1)));
     }
