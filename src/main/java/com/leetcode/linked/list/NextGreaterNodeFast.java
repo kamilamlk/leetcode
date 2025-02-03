@@ -13,9 +13,30 @@ public class NextGreaterNodeFast {
             size++;
             current = current.next;
         }
-
+        // swap list
+        ListNode prev = null;
+        current = head;
+        while (current != null) {
+            ListNode next = current.next; // 1
+            current.next = prev; // null
+            prev = current; // 2
+            current = next; // 1
+        }
         Stack<Integer> stack = new Stack<>();
         int[] array = new int[size];
+        current = prev;
+        while(current != null) {
+            while (!stack.isEmpty() && stack.peek() <= current.val) {
+                stack.pop();
+            }
+            if (stack.isEmpty()) {
+                array[--size] = 0;
+            } else {
+                array[--size] = stack.peek();
+            }
+            stack.push(current.val);
+            current = current.next;
+        }
         return array;
     }
 
