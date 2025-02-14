@@ -11,4 +11,14 @@ public class ListNode {
     public String toString() {
         return val + ", " + next;
     }
+
+    public static ListNode create(int... vars) {
+        ListNode head = new ListNode(0);
+        ListNode node = head;
+        for (int var : vars) {
+            node.next = new ListNode(var);
+            node = node.next;
+        }
+        return head.next;
+    }
 }
