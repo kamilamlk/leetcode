@@ -13,6 +13,8 @@ public class AverageSalary {
             }
             sum += i;
         }
+        int[] values = new int[] {1, 5, 10, 50, 100, 500, 1000};
+        char[] symbs = new char[] {'I', 'V', 'X', 'L', 'C', 'D', 'M'};
         return (sum - min - max) / (salary.length - 2.0);
     }
 }
