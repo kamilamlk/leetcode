@@ -1,25 +1,23 @@
 package com.leetcode.ocp;
 
 public class Arrays {
-    public static void main(String[] args) {
+    public static void main(String args[]) {
+        float f = 12.5f;
+        int $d = 0;
+        int[][]ee = new int[2][];
+        Number[] nums = new Integer[3];
+        System.out.println(new int[]{1, 2}); // [I@279f2327
 
-        System.out.println(findMin(new int[]{1, 2, 3, 4}));
+        int x = 5;
+        int y = x++ + ++x; // 5 + 6 = 11
+        System.out.println(y);
+        System.out.println(Integer.toBinaryString(-1));
 
-        Integer a = 5;
-        Arrays arrays = new Arrays();
-        arrays.magic(a);
-        System.out.println(a);
+        int[] arr = new int[] {};
     }
 
-    private static int findMin(int[] array) {
-        int min = Integer.MAX_VALUE;
-        for (int i = 0; i < array.length; i++) {
-            min = Math.min(min, array[i]);
-        }
-        return min;
-    }
+    public static double divide(int a, double b) {
 
-    private void magic(Integer integer) {
-        integer = 7;
+        return (double) a / b;
     }
 }
