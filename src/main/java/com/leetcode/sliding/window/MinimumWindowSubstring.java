@@ -2,55 +2,53 @@ package com.leetcode.sliding.window;
 
 public class MinimumWindowSubstring {
     public String minWindow(String s, String t) {
-        if(s.length() < t.length()) {
-            return "";
-        }
-
-        int[] counts = new int[58];
-        for(int i = 0; i < t.length(); i++) {
-            char current = t.charAt(i);
-            counts[current - 'A']++;
-        }
-
+        int[] tCounts = new int[58];
         int[] sCounts = new int[58];
+
+        for (int i = 0; i < t.length(); i++) {
+            tCounts[t.charAt(i) - 'A']++;
+        }
+
+        int size = t.length();
         int left = 0;
         int minLeft = 0;
-        int minRight = s.length() - 1;
-
-        int unique = 0;
-
-        for(int right = 0; right < s.length(); right++){
-            char current = s.charAt(right);
-            sCounts[current - 'A']++;
-            if(counts[current - 'A'] != 0 && sCounts[current - 'A'] <= counts[current - 'A']) {
-                unique++;
+        int minRight = s.length() + 1;
+        int count = 0;
+        for (int right = 0; right < s.length(); right++) {
+            char rChar = s.charAt(right);
+            sCounts[rChar - 'A']++;
+            if (sCounts[rChar - 'A'] <= tCounts[rChar - 'A']) {
+                count++;
             }
 
-            while(sCounts[current - 'A'] > counts[current - 'A']) {
-                char leftChar = s.charAt(left);
-                if(counts[leftChar - 'A'] != 0 && sCounts[leftChar - 'A'] <= counts[leftChar - 'A']) {
-                    unique--;
+            while(count >= size) {
+                if (count == size && right - left + 1 == size) {
+                    return s.substring(left, right + 1);
                 }
-                sCounts[leftChar - 'A']--;
+
+                if (right - left + 1 < minRight - minLeft + 1) {
+                    minLeft = left;
+                    minRight = right;
+                }
+
+                char lChar = s.charAt(left);
+                if (sCounts[lChar - 'A'] <= tCounts[lChar - 'A']) {
+                    count--;
+                }
+                sCounts[lChar - 'A']--;
                 left++;
             }
-
-            int diff = right - left + 1; // length
-            if(diff == t.length() && unique == t.length()) {
-                return s.substring(left, right + 1);
-            }
-
-            if(diff > t.length() && unique == t.length() && (minRight - minLeft + 1) > diff) {
-                minRight = right;
-                minLeft = left;
-            }
         }
-
+        if (minRight == s.length() + 1) {
+            return "";
+        }
         return s.substring(minLeft, minRight + 1);
     }
 
     public static void main(String[] args) {
         MinimumWindowSubstring minimumWindowSubstring = new MinimumWindowSubstring();
-        System.out.println(minimumWindowSubstring.minWindow("ADOBANC", "ABC"));
+        System.out.println(minimumWindowSubstring.minWindow("ADOBECODEBANC", "ABC"));
+        System.out.println(minimumWindowSubstring.minWindow("a", "a"));
+        System.out.println(minimumWindowSubstring.minWindow("a", "aa"));
     }
 }
