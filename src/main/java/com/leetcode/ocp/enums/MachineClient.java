@@ -5,6 +5,7 @@ public class MachineClient {
         Machine machine = new Machine();
         machine.setState(MachineState.BUSY);
 
+
     }
 }
 class Machine {
