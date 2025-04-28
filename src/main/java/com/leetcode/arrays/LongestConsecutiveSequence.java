@@ -1,6 +1,5 @@
 package com.leetcode.arrays;
 
-
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -9,6 +8,7 @@ public class LongestConsecutiveSequence {
 
 
     public static void main(String[] args) {
+
         LongestConsecutiveSequence longestConsecutiveSequence = new LongestConsecutiveSequence();
         System.out.println(longestConsecutiveSequence.longestConsecutive(new int[]{0, 3, 7, 2, 5, 8, 4, 6, 0, 1}));
 //        System.out.println(longestConsecutiveSequence.longestConsecutive(new int[]{100, 4, 200, 1, 3, 2}));
