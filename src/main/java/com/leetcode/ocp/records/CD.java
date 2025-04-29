@@ -3,8 +3,7 @@ package com.leetcode.ocp.records;
 public record CD(int a) {
     public static int b = 1;
     public static final int c = 2;
-    public CD(int a1) {
-        this.a = a1;
+    public CD {
         System.out.println("Canonical: CD(int a)");
     }
 
