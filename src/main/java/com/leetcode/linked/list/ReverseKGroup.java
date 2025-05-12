@@ -3,50 +3,77 @@ package com.leetcode.linked.list;
 import com.leetcode.pointers.ListNode;
 
 public class ReverseKGroup {
-    public ListNode reverseKGroup(ListNode head, int k) {
-        int n = 0;
-        ListNode current = head;
-        while (current != null) {
-            current = current.next;
-            n++;
-        }
-        int step = n / k;
-        ListNode dummy = new ListNode(0);
-        for (int i = 0; i < n; i+= step) {
-
-        }
-    }
-
-    ListNode tail;
+    ListNode dummy;
     ListNode start;
+    int i = 0;
 
-    public ListNode reverseBetween(ListNode head, int left, int right) {
-        if (left == right) {
+    public ListNode reverseKGroup(ListNode head, int k) {
+        if (k == 1) {
             return head;
         }
-        ListNode dummy = new ListNode(0);
-        dummy.next = head;
-        int i = 0;
-        ListNode current = dummy;
-        while (i < left - 1) {
-            current = current.next;
-            i++;
+        if (head == null || head.next == null) {
+            return head;
         }
-        var next = reverse(current.next, right, i + 1);
-        next.next = tail;
-        current.next = start;
+
+        init();
+
+        int n = 0;
+        ListNode current = head;
+        while(current != null) {
+            n++;
+            current = current.next;
+        }
+        dummy.next = head;
+
+        ListNode tail = dummy;
+        current = dummy;
+        while(i + k <= n) {
+            tail = reverse(tail.next, tail.next, i + k);
+            current.next = start;
+            current = tail;
+        }
+
         return dummy.next;
     }
 
-    private ListNode reverse(ListNode node, int right, int i) {
+    private void init() {
+        dummy = new ListNode(0);
+        start = null;
+        i = 0;
+    }
+
+
+    private ListNode reverse(ListNode head, ListNode node, int right) {
+        i++;
         if(i == right) {
-            tail = node.next;
             start = node;
+            head.next = node.next;
             return node;
         }
-        var current = reverse(node.next, right, i+1);
+        var current = reverse(head, node.next, right);
         current.next = node;
         return node;
     }
 
+
+    public static void main(String[] args) {
+        ReverseKGroup reverseKGroup = new ReverseKGroup();
+        ListNode head = create(1, 2, 3, 4, 5, 6, 7);
+        System.out.println(reverseKGroup.reverseKGroup(head, 3));
+        head = create(1, 2, 3, 4, 5);
+        System.out.println(reverseKGroup.reverseKGroup(head, 2));
+        head = create(1, 2, 3, 4, 5);
+        System.out.println(reverseKGroup.reverseKGroup(head, 3));
+    }
+
+
+    private static ListNode create(int... vars) {
+        ListNode head = new ListNode(0);
+        ListNode node = head;
+        for (int var : vars) {
+            node.next = new ListNode(var);
+            node = node.next;
+        }
+        return head.next;
+    }
 }
