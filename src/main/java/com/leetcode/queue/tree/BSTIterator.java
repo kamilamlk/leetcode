@@ -1,9 +1,7 @@
 package com.leetcode.queue.tree;
 
-import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.LinkedList;
-import java.util.TreeMap;
 
 public class BSTIterator {
     Deque<TreeNode> stack;

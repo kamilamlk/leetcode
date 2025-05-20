@@ -1,6 +1,7 @@
 package com.leetcode.ocp;
 
 public class EvalOrder {
+    volatile EvalOrder evalOrder;
     public static void main(String[] args) {
         int j = 2;
         add(eval(j++, " + "), eval(j++, " * "), eval(j, "\n"));

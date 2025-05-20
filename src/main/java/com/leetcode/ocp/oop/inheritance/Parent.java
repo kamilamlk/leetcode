@@ -1,8 +1,11 @@
 package com.leetcode.ocp.oop.inheritance;
 
-public class Parent {
+import java.util.concurrent.Callable;
+
+public abstract class Parent {
     protected int anInt;
     protected static String aString;
+
 
     public Parent(int anInt, String aString) {
         this.anInt = anInt;
