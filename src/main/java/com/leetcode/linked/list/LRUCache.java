@@ -1,20 +1,20 @@
 package com.leetcode.linked.list;
 
-import com.leetcode.queue.stack.Node;
-
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
-public class LRUCache {
-    Map<Integer, Node> cache;
-    int capacity;
-    Node head;
-    Node tail;
+class LRUCache {
+    private final int capacity;
+    private final Map<Integer,Node> cache;
+    private Node head;
+    private Node tail;
 
     public LRUCache(int capacity) {
         this.capacity = capacity;
         this.cache = new HashMap<>();
-
+        this.head = new Node(-1, -1);
+        this.tail = head;
     }
 
     public int get(int key) {
@@ -22,61 +22,63 @@ public class LRUCache {
         if (node == null) {
             return -1;
         }
-        makeHead(node);
+        balance(node);
         return node.value;
     }
 
     public void put(int key, int value) {
-        Node node = cache.get(key);
-        if (node != null) {
+        Node node;
+        if (cache.containsKey(key)) {
+            node = cache.get(key);
             node.value = value;
         } else {
             node = new Node(key, value);
+            head.prev = node;
+            node.next = head;
+            head = node;
             cache.put(key, node);
         }
-        makeHead(node);
+        balance(node);
+
         resize();
     }
-    /*
-        * 1. remove node from current position
-        *       can be done by removing the next and prev pointers
-        * 2. add node to head
-        * 3. update head and tail
-     */
+
+    private void balance(Node node) {
+        if (node.next == null && node.prev == null) { // new node
+            makeHead(node);
+        } else if (node.next != null && node.prev != null) { // somewhere in the middle
+            Node prev = node.prev;
+            Node next = node.next;
+            prev.next = next;
+            next.prev = prev;
+
+            makeHead(node);
+        } else if (node == tail) { // tail
+            Node prev = node.prev;
+            prev.next = null;
+            node.prev = null;
+            // make head;
+            makeHead(node);
+        }
+    }
+
     private void makeHead(Node node) {
-        if (node == head) {
-            return;
-        }
-        if (node.prev != null) {
-            node.prev.next = node.next;
-        }
-        if (node.next != null) {
-            node.next.prev = node.prev;
-        }
-        if (node == tail) {
-            tail = node.prev;
-        }
+        Node next = head;
+        head.prev = node;
+        node.next = next;
         node.prev = null;
-        node.next = head;
-
-        if (head != null) {
-            head.prev = node;
-        }
         head = node;
-
-        if (tail == null) {
-            tail = node;
-        }
     }
 
     private void resize() {
-        if (cache.size() > capacity) {
+        if (cache.size() == capacity ) {
             cache.remove(tail.key);
             Node prev = tail.prev;
             prev.next = null;
             tail = prev;
         }
     }
+
 
     private static class Node {
         int key;
@@ -90,16 +92,5 @@ public class LRUCache {
         }
     }
 
-    public static void main(String[] args) {
-        LRUCache lruCache = new LRUCache(2);
-        lruCache.put(2, 1);
-        lruCache.put(3, 2);
-        System.out.println(lruCache.get(3) + " == " + 2); // return 2
-        System.out.println(lruCache.get(2) + " == " + 1); // return 1
-        lruCache.put(4, 3); // evicts key 3
-        System.out.println(lruCache.get(2) + " == " + 1); // return 1
-        System.out.println(lruCache.get(3) + " == " + -1); // return -1 (not found)
-        System.out.println(lruCache.get(4) + " == " + 3); // return 3
 
-    }
 }
