@@ -24,7 +24,7 @@ public class Outer {
         int x = 5;
         int y = 10;
 
-        class LocalHelper {
+        final class LocalHelper {
             public void display() {
                 System.out.println("Local class method: " + (x + y));
                 System.out.println("Local class method: " + Outer.this.instanceField);
