@@ -1,21 +1,19 @@
 package com.leetcode.arrays;
 
 import java.util.Arrays;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.Stack;
 
 public class NextGreaterElement {
     public int[] nextGreaterElement(int[] nums) {
         int[] result = new int[nums.length];
-        Stack<Integer> stack = new Stack<>();
+        Deque<Integer> stack = new LinkedList<>(); // monotonic decreasing stack
         for(int i = nums.length - 1; i >= 0; i--) {
-            while (!stack.isEmpty() && stack.peek() <= nums[i]) {
+            while(!stack.isEmpty() && stack.peekLast() <= nums[i]) {
                 stack.pop();
             }
-            if (stack.isEmpty()) {
-                result[i] = -1;
-            } else {
-                result[i] = stack.peek();
-            }
+            result[i] = stack.isEmpty() ? -1 : stack.peekLast();
             stack.push(nums[i]);
         }
         return result;
