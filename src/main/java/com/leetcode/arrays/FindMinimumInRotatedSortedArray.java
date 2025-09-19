@@ -15,5 +15,6 @@ public class FindMinimumInRotatedSortedArray {
         FindMinimumInRotatedSortedArray finder = new FindMinimumInRotatedSortedArray();
         int[] nums = {3,1,2};
         System.out.println(finder.findMin(nums)); // Output: 1
+
     }
 }

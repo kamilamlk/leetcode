@@ -32,6 +32,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.openjdk.jol</groupId>
+            <artifactId>jol-core</artifactId>
+            <version>0.17</version>
+        </dependency>
+        <dependency>
             <groupId>org.junit</groupId>
             <artifactId>junit5-engine</artifactId>
             <version>5.0.0-ALPHA</version>
