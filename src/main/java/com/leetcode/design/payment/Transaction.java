@@ -1,11 +1,14 @@
 package com.leetcode.design.payment;
 
+import com.leetcode.design.currency.exchange.Currency;
+
 public record Transaction(
     String id,        // unique ID (UUID)
     String fromUser,  // null for deposits
     String toUser,    // null for withdrawals
     int amount,
-    long timestamp
+    long timestamp,
+    Currency currency
 ) {
 
     public static Transaction of(
@@ -18,7 +21,25 @@ public record Transaction(
             fromUser,
             toUser,
             amount,
-            System.currentTimeMillis()
+            System.currentTimeMillis(),
+            Currency.USD
         );
     }
+
+    public static Transaction of(
+        final String id,
+        final int amount,
+        final Currency currency
+    ) {
+        return new Transaction(
+            id,
+            null,
+            null,
+            amount,
+            System.currentTimeMillis(),
+            currency
+        );
+    }
+
+
 }
